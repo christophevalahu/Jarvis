@@ -1,0 +1,3318 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 11.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[    161160,       3310]
+NotebookOptionsPosition[    155374,       3215]
+NotebookOutlinePosition[    155775,       3231]
+CellTagsIndexPosition[    155732,       3228]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[BoxData[
+ RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.7705554025050464`*^9, 
+  3.7705554338198376`*^9}},ExpressionUUID->"878198a8-61d4-4f7a-b80d-\
+20af84cf53bc"],
+
+Cell[CellGroupData[{
+
+Cell["Constants", "Section",
+ CellChangeTimes->{{3.770554865883353*^9, 3.7705548686115093`*^9}, {
+  3.770554904831581*^9, 
+  3.770554906248662*^9}},ExpressionUUID->"91ab2f35-b6a7-4be7-9773-\
+b7b6189b865e"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"kB", " ", "=", " ", 
+   RowBox[{"1.38", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "23"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[HBar]", " ", "=", " ", 
+   RowBox[{"1.055", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "34"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"m", " ", "=", " ", 
+   RowBox[{"2.838464", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "25"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[Mu]B", " ", "=", " ", 
+   RowBox[{"9.27400968", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "24"}]]}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"dzB", " ", "=", " ", "23.5"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.7705549184963627`*^9, 3.7705549249087296`*^9}, {
+   3.7705553543562927`*^9, 3.7705553576244793`*^9}, {3.7705554741061416`*^9, 
+   3.770555500039625*^9}, 3.770555554574744*^9},
+ CellLabel->
+  "In[108]:=",ExpressionUUID->"0f981b70-bd04-498b-94b3-ed37d6b92798"]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Functions", "Section",
+ CellChangeTimes->{{3.770554937384443*^9, 
+  3.7705549389305315`*^9}},ExpressionUUID->"6cf58a58-fada-41f9-96ab-\
+2a0eecfec817"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Eta]", "[", "\[Nu]_", "]"}], ":=", " ", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"\[Mu]B", " ", "dzB"}], 
+     RowBox[{"\[HBar]", " ", "\[Nu]"}]], 
+    SqrtBox[
+     FractionBox["\[HBar]", 
+      RowBox[{"2", " ", "m", " ", "\[Nu]"}]]]}]}], ";"}]], "Input",
+ CellLabel->
+  "In[113]:=",ExpressionUUID->"58c5e02a-f0e0-4441-8406-da5ffc5630c9"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"P1", "[", 
+   RowBox[{
+   "\[CapitalOmega]_", ",", "\[CapitalDelta]_", ",", "t_", ",", "\[Tau]_"}], 
+   "]"}], " ", ":=", " ", 
+  RowBox[{
+   FractionBox[
+    RowBox[{" ", 
+     SuperscriptBox["\[CapitalOmega]", "2"]}], 
+    RowBox[{
+     SuperscriptBox["\[CapitalOmega]", "2"], "+", 
+     SuperscriptBox["\[CapitalDelta]", "2"]}]], 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{"Sin", "[", 
+           RowBox[{
+            FractionBox["1", "2"], 
+            SqrtBox[
+             RowBox[{
+              SuperscriptBox["\[CapitalOmega]", "2"], "+", 
+              SuperscriptBox["\[CapitalDelta]", "2"]}]], "t"}], "]"}], ")"}], 
+         "2"], "-", "0.5"}], ")"}], 
+      RowBox[{"Exp", "[", 
+       RowBox[{
+        RowBox[{"-", "t"}], "/", "\[Tau]"}], "]"}]}], "+", "0.5"}], 
+    ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"\[CapitalOmega]sb", "[", 
+   RowBox[{"\[CapitalOmega]_", ",", " ", "\[Eta]_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"\[CapitalOmega]", " ", "\[Eta]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"P", "[", 
+    RowBox[{"n_", ",", "nbar_"}], "]"}], " ", ":=", " ", 
+   RowBox[{
+    FractionBox["1", 
+     RowBox[{"1", "+", "nbar"}]], 
+    SuperscriptBox[
+     RowBox[{"(", 
+      FractionBox["nbar", 
+       RowBox[{"1", "+", "nbar"}]], ")"}], "n"]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PRSB", "[", 
+   RowBox[{
+   "\[CapitalOmega]_", ",", "\[CapitalDelta]_", ",", "t_", ",", "\[Tau]_", 
+    ",", "nbar_", ",", " ", "nlevels_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"P", "[", 
+      RowBox[{"n", ",", "nbar"}], "]"}], " ", 
+     RowBox[{"P1", "[", 
+      RowBox[{
+       RowBox[{
+        SqrtBox["n"], "\[CapitalOmega]"}], ",", "\[CapitalDelta]", ",", "t", 
+       ",", "\[Tau]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "0", ",", "nlevels"}], "}"}]}], 
+   "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"PBSB", "[", 
+   RowBox[{
+   "\[CapitalOmega]_", ",", "\[CapitalDelta]_", ",", "t_", ",", "\[Tau]_", 
+    ",", "nbar_", ",", " ", "nlevels_"}], "]"}], " ", ":=", " ", 
+  RowBox[{"Sum", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"P", "[", 
+      RowBox[{"n", ",", "nbar"}], "]"}], " ", 
+     RowBox[{"P1", "[", 
+      RowBox[{
+       RowBox[{
+        SqrtBox[
+         RowBox[{"n", "+", "1"}]], "\[CapitalOmega]"}], ",", 
+       "\[CapitalDelta]", ",", "t", ",", "\[Tau]"}], "]"}]}], ",", 
+    RowBox[{"{", 
+     RowBox[{"n", ",", "0", ",", "nlevels"}], "}"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.7705549809289336`*^9, 3.7705550068294153`*^9}, {
+  3.7705550661758094`*^9, 3.770555081780702*^9}, {3.770555383639967*^9, 
+  3.7705553848010335`*^9}, {3.770555526115116*^9, 3.770555536392704*^9}},
+ CellLabel->
+  "In[114]:=",ExpressionUUID->"02eee4b5-66f1-470f-b160-4a16de5685b2"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Parameters", "Section",
+ CellChangeTimes->{{3.770554962807897*^9, 
+  3.770554967473164*^9}},ExpressionUUID->"9417eec9-b173-4d8d-8ac7-\
+8de341b9d52e"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Nu]", " ", "=", " ", 
+    RowBox[{"2", "\[Pi]", " ", "266", " ", 
+     SuperscriptBox["10", "3"]}]}], ";"}], " ", 
+  RowBox[{"(*", 
+   RowBox[{"Secular", " ", "Frequency"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[Tau]", " ", "=", " ", 
+    RowBox[{"2", " ", 
+     SuperscriptBox["10", 
+      RowBox[{"-", "3"}]]}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Decoherence", " ", "decay", " ", "constant"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"\[CapitalOmega]", " ", "=", " ", 
+    RowBox[{"2", "\[Pi]", " ", "47.38", " ", 
+     SuperscriptBox["10", "3"]}]}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Carrier", " ", "Rabi", " ", "Frequency"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"nbar", " ", "=", " ", "80"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Average", " ", "motional", " ", "state"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"nlevels", " ", "=", " ", "200"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "Input",
+ CellChangeTimes->{{3.7705550104246206`*^9, 3.770555060979512*^9}, {
+   3.770555226314969*^9, 3.770555239611729*^9}, 3.7705553760815353`*^9, {
+   3.7705555572418966`*^9, 3.7705555588579893`*^9}, {3.770555591342847*^9, 
+   3.77055561097797*^9}, {3.770555681925028*^9, 3.7705557356851034`*^9}, {
+   3.770555770795111*^9, 3.7705557792635956`*^9}, {3.770557283259619*^9, 
+   3.770557288363911*^9}, {3.808664177620884*^9, 3.8086641892906556`*^9}, {
+   3.808664227779669*^9, 3.8086642281686287`*^9}},
+ CellLabel->
+  "In[159]:=",ExpressionUUID->"af3ee059-b361-4a07-8e6c-c6272d5b815f"],
+
+Cell[BoxData["0.01303347510579006`"], "Output",
+ CellChangeTimes->{3.770557289055951*^9, 3.8086641910260105`*^9, 
+  3.8086642286992083`*^9, 3.816102188982643*^9, 3.816103174998513*^9},
+ CellLabel->
+  "Out[164]=",ExpressionUUID->"9f05248f-a0db-4529-afb1-5bb7a599d4a5"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"PRSB", "[", 
+  RowBox[{
+   RowBox[{"\[CapitalOmega]sb", "[", 
+    RowBox[{"\[CapitalOmega]", ",", " ", 
+     RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", 
+   RowBox[{"2", " ", "\[Pi]", " ", "500"}], ",", 
+   RowBox[{"100", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "6"}]]}], ",", "\[Tau]", ",", "50", ",", " ", "nlevels"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"P1", "[", 
+  RowBox[{"\[CapitalOmega]", ",", " ", 
+   RowBox[{"2", " ", "\[Pi]", " ", "500"}], ",", " ", 
+   RowBox[{"100", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "6"}]]}], ",", " ", "\[Tau]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.816102472923829*^9, 3.816102495776832*^9}, {
+  3.8161027203492537`*^9, 3.816102738135687*^9}},
+ CellLabel->
+  "In[165]:=",ExpressionUUID->"cc96909a-6edd-4943-bf4d-277afd0f94ce"],
+
+Cell[BoxData["0.6155179733915722`"], "Output",
+ CellChangeTimes->{3.8161024984437*^9, 3.8161027387699904`*^9, 
+  3.816103207066752*^9},
+ CellLabel->
+  "Out[165]=",ExpressionUUID->"e110606f-359a-4565-858a-656f33f37050"],
+
+Cell[BoxData["0.5349807652748346`"], "Output",
+ CellChangeTimes->{3.8161024984437*^9, 3.8161027387699904`*^9, 
+  3.8161032070817127`*^9},
+ CellLabel->
+  "Out[166]=",ExpressionUUID->"9c76209a-169f-4b0a-9df4-12ca4e4093ba"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"n", " ", "=", " ", "200"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{" ", 
+  RowBox[{
+   RowBox[{"P1", "[", 
+    RowBox[{
+     RowBox[{
+      SqrtBox[
+       RowBox[{"n", "+", "1"}]], 
+      RowBox[{"\[CapitalOmega]sb", "[", 
+       RowBox[{"\[CapitalOmega]", ",", " ", 
+        RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}]}], ",", 
+     RowBox[{"2", " ", "\[Pi]", " ", "500"}], ",", 
+     RowBox[{"100", " ", 
+      SuperscriptBox["10", 
+       RowBox[{"-", "6"}]]}], ",", "\[Tau]"}], "]"}], "//", 
+   "N"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"P", "[", 
+   RowBox[{"n", ",", " ", "50"}], "]"}], "//", "N"}], "\[IndentingNewLine]", 
+ RowBox[{"PBSB", "[", 
+  RowBox[{
+   RowBox[{"\[CapitalOmega]sb", "[", 
+    RowBox[{"\[CapitalOmega]", ",", " ", 
+     RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", " ", 
+   RowBox[{"2", " ", "\[Pi]", " ", "500"}], ",", " ", 
+   RowBox[{"100", " ", 
+    SuperscriptBox["10", 
+     RowBox[{"-", "6"}]]}], ",", " ", "\[Tau]", ",", " ", "50", ",", " ", 
+   "n"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.816102907929607*^9, 3.816103033469445*^9}, {
+  3.8161031506825414`*^9, 3.816103150885998*^9}, {3.8161032687976637`*^9, 
+  3.816103327075034*^9}, {3.816103377259823*^9, 3.8161033774662714`*^9}, {
+  3.8161034852022443`*^9, 3.8161035667739563`*^9}, {3.8161036117506747`*^9, 
+  3.8161036548823886`*^9}},
+ CellLabel->
+  "In[213]:=",ExpressionUUID->"2e1a9e90-a63f-4dab-9203-e86921e5ff08"],
+
+Cell[BoxData["0.1591361497605918`"], "Output",
+ CellChangeTimes->{{3.816102915467506*^9, 3.816103033627023*^9}, 
+   3.8161030866039085`*^9, 3.816103153934844*^9, 3.816103210733945*^9, {
+   3.8161032975907626`*^9, 3.816103327462*^9}, 3.8161033779599514`*^9, {
+   3.8161034857926645`*^9, 3.8161035159458866`*^9}, {3.816103559224146*^9, 
+   3.8161035670821323`*^9}, {3.816103612517623*^9, 3.816103655402001*^9}},
+ CellLabel->
+  "Out[214]=",ExpressionUUID->"cbcb3a59-0422-4d17-8e4b-9ef683d3ce52"],
+
+Cell[BoxData["0.00037359019673360644`"], "Output",
+ CellChangeTimes->{{3.816102915467506*^9, 3.816103033627023*^9}, 
+   3.8161030866039085`*^9, 3.816103153934844*^9, 3.816103210733945*^9, {
+   3.8161032975907626`*^9, 3.816103327462*^9}, 3.8161033779599514`*^9, {
+   3.8161034857926645`*^9, 3.8161035159458866`*^9}, {3.816103559224146*^9, 
+   3.8161035670821323`*^9}, {3.816103612517623*^9, 3.8161036554089804`*^9}},
+ CellLabel->
+  "Out[215]=",ExpressionUUID->"35900626-4c01-4548-853e-6f98542a5474"],
+
+Cell[BoxData["0.627887784564901`"], "Output",
+ CellChangeTimes->{{3.816102915467506*^9, 3.816103033627023*^9}, 
+   3.8161030866039085`*^9, 3.816103153934844*^9, 3.816103210733945*^9, {
+   3.8161032975907626`*^9, 3.816103327462*^9}, 3.8161033779599514`*^9, {
+   3.8161034857926645`*^9, 3.8161035159458866`*^9}, {3.816103559224146*^9, 
+   3.8161035670821323`*^9}, {3.816103612517623*^9, 3.8161036554149637`*^9}},
+ CellLabel->
+  "Out[216]=",ExpressionUUID->"4de0492f-72b9-494e-9f62-faedb2d5b847"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Input ", "Section",
+ CellChangeTimes->{{3.7705550877170415`*^9, 
+  3.7705550915432606`*^9}},ExpressionUUID->"5579f870-9109-43a8-ae4a-\
+1f18dad85603"],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{"Input", " ", "list", " ", "of", " ", "probabilites"}], " ", 
+  "*)"}]], "Input",
+ CellChangeTimes->{{3.770555096180526*^9, 
+  3.7705551071841545`*^9}},ExpressionUUID->"4964a99a-c433-4c2f-b971-\
+53bacfcce7e6"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pup", " ", "=", " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "1.5494014760459318", ",", "2.6760423435425413", ",", "4.929548519234583",
+      ",", "18.450649592297655", ",", "22.957861747811968", ",", 
+     "25.211270890310356", ",", "35.35214658722074", ",", "53.3802882555793", 
+     ",", "62.39447163318032", ",", "62.39447163318032", ",", 
+     "68.02815454931044", ",", "57.88735947229999", ",", "49.99999999999999", 
+     ",", "60.140765556595234", ",", "47.7464767051668", ",", 
+     "49.99999999999999", ",", "42.1126405277", ",", "63.52101148484566", ",",
+      "47.7464767051668", ",", "51.126760857165976", ",", "56.76059373435906",
+      ",", "42.1126405277", ",", "46.6197117444207", ",", 
+     "52.253523294833826", ",", "45.49294421646051", ",", "55.63382492082491",
+      ",", "45.49294421646051", ",", "37.605528366819975", ",", 
+     "46.6197117444207", ",", "44.36617507917514", ",", "44.36617507917514"}],
+     "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"Tstep", " ", "=", " ", "10"}], ";"}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Time", " ", "step", " ", "of", " ", "experiment"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{
+  3.770555119090836*^9, {3.770555175322052*^9, 3.770555200683503*^9}, {
+   3.7705570729855924`*^9, 3.7705570748647*^9}, {3.808664195437207*^9, 
+   3.8086641987573233`*^9}, 3.8086648529777775`*^9},
+ CellLabel->
+  "In[217]:=",ExpressionUUID->"7a195da7-58e7-471f-8bf5-defdf8ab3329"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Logic", "Section",
+ CellChangeTimes->{{3.7705551317885623`*^9, 
+  3.7705551329346275`*^9}},ExpressionUUID->"aece8b02-eb43-496e-9b7e-\
+fccb40defa7b"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"pup", " ", "=", " ", 
+   RowBox[{"pup", "/", "100"}]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Normalise", " ", "probabilities", " ", "over", " ", "1"}], " ", 
+   "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"xList", " ", "=", " ", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"Tstep", " ", "*", " ", "i"}], ",", " ", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", " ", "0", ",", " ", 
+       RowBox[{
+        RowBox[{"Length", "[", "pup", "]"}], " ", "-", " ", "1"}]}], "}"}]}], 
+    "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.770555135719787*^9, 3.7705551507086444`*^9}, {
+   3.7705551880087776`*^9, 3.7705551916879883`*^9}, 3.7705570661201997`*^9},
+ CellLabel->
+  "In[220]:=",ExpressionUUID->"7f1b3b9a-87e6-4f6f-943c-2e4e760d7e10"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.01549401476045932`", ",", "0.026760423435425413`", ",", 
+   "0.049295485192345834`", ",", "0.18450649592297655`", ",", 
+   "0.2295786174781197`", ",", "0.25211270890310356`", ",", 
+   "0.3535214658722074`", ",", "0.533802882555793`", ",", 
+   "0.6239447163318033`", ",", "0.6239447163318033`", ",", 
+   "0.6802815454931045`", ",", "0.5788735947229999`", ",", 
+   "0.49999999999999994`", ",", "0.6014076555659523`", ",", 
+   "0.477464767051668`", ",", "0.49999999999999994`", ",", "0.421126405277`", 
+   ",", "0.6352101148484566`", ",", "0.477464767051668`", ",", 
+   "0.5112676085716598`", ",", "0.5676059373435907`", ",", "0.421126405277`", 
+   ",", "0.466197117444207`", ",", "0.5225352329483383`", ",", 
+   "0.45492944216460507`", ",", "0.556338249208249`", ",", 
+   "0.45492944216460507`", ",", "0.37605528366819974`", ",", 
+   "0.466197117444207`", ",", "0.44366175079175146`", ",", 
+   "0.44366175079175146`"}], "}"}]], "Output",
+ CellChangeTimes->{3.8161022084100018`*^9, 3.816103668917187*^9},
+ CellLabel->
+  "Out[220]=",ExpressionUUID->"b2c76ac5-bfaf-4a19-b9e5-876c5da22d01"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.01549401476045932`", ",", "0.026760423435425413`", ",", 
+   "0.049295485192345834`", ",", "0.18450649592297655`", ",", 
+   "0.2295786174781197`", ",", "0.25211270890310356`", ",", 
+   "0.3535214658722074`", ",", "0.533802882555793`", ",", 
+   "0.6239447163318033`", ",", "0.6239447163318033`", ",", 
+   "0.6802815454931045`", ",", "0.5788735947229999`", ",", 
+   "0.49999999999999994`", ",", "0.6014076555659523`", ",", 
+   "0.477464767051668`", ",", "0.49999999999999994`", ",", "0.421126405277`", 
+   ",", "0.6352101148484566`", ",", "0.477464767051668`", ",", 
+   "0.5112676085716598`", ",", "0.5676059373435907`", ",", "0.421126405277`", 
+   ",", "0.466197117444207`", ",", "0.5225352329483383`", ",", 
+   "0.45492944216460507`", ",", "0.556338249208249`", ",", 
+   "0.45492944216460507`", ",", "0.37605528366819974`", ",", 
+   "0.466197117444207`", ",", "0.44366175079175146`", ",", 
+   "0.44366175079175146`"}], "}"}]], "Input",
+ CellChangeTimes->{3.8161022039379606`*^9},
+ CellLabel->
+  "In[222]:=",ExpressionUUID->"304b8345-ac8d-446f-b094-fd95530fde6c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.01549401476045932`", ",", "0.026760423435425413`", ",", 
+   "0.049295485192345834`", ",", "0.18450649592297655`", ",", 
+   "0.2295786174781197`", ",", "0.25211270890310356`", ",", 
+   "0.3535214658722074`", ",", "0.533802882555793`", ",", 
+   "0.6239447163318033`", ",", "0.6239447163318033`", ",", 
+   "0.6802815454931045`", ",", "0.5788735947229999`", ",", 
+   "0.49999999999999994`", ",", "0.6014076555659523`", ",", 
+   "0.477464767051668`", ",", "0.49999999999999994`", ",", "0.421126405277`", 
+   ",", "0.6352101148484566`", ",", "0.477464767051668`", ",", 
+   "0.5112676085716598`", ",", "0.5676059373435907`", ",", "0.421126405277`", 
+   ",", "0.466197117444207`", ",", "0.5225352329483383`", ",", 
+   "0.45492944216460507`", ",", "0.556338249208249`", ",", 
+   "0.45492944216460507`", ",", "0.37605528366819974`", ",", 
+   "0.466197117444207`", ",", "0.44366175079175146`", ",", 
+   "0.44366175079175146`"}], "}"}]], "Output",
+ CellChangeTimes->{3.816102204111497*^9, 3.81610367071224*^9},
+ CellLabel->
+  "Out[222]=",ExpressionUUID->"b30adb2a-25e8-4615-bf78-86f5e6a62366"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Output", "Section",
+ CellChangeTimes->{{3.7705552166414156`*^9, 
+  3.7705552180584965`*^9}},ExpressionUUID->"1bc3aaae-0b1f-4d25-ac1c-\
+c046883e80d3"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"PRSB", "[", 
+       RowBox[{
+        RowBox[{"\[CapitalOmega]sb", "[", 
+         RowBox[{"\[CapitalOmega]", ",", " ", 
+          RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", 
+        RowBox[{"2", " ", "\[Pi]", " ", "500"}], ",", 
+        RowBox[{"t", " ", 
+         SuperscriptBox["10", 
+          RowBox[{"-", "6"}]]}], ",", "\[Tau]", ",", "50", ",", " ", 
+        "nlevels"}], "]"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", "  ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", 
+          RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"xList", ",", " ", "pup"}], "}"}], "]"}], "]"}], ",", " ", 
+   RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
+   RowBox[{"FrameLabel", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<t [\[Mu]s]\>\"", ",", " ", "\"\<P(up)\>\""}], "}"}]}], ",", 
+   " ", 
+   RowBox[{"FrameStyle", "\[Rule]", " ", 
+    RowBox[{"{", " ", "Thick", "}"}]}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.8086642646270847`*^9, 3.808664374882492*^9}, {
+  3.808664872058719*^9, 3.808664882211554*^9}, {3.8086650253295856`*^9, 
+  3.8086650255091047`*^9}, {3.8086651513567867`*^9, 3.8086651728702183`*^9}},
+ CellLabel->
+  "In[223]:=",ExpressionUUID->"af4ac946-6371-4bb0-9153-df8d3e56a8f5"],
+
+Cell[BoxData[
+ GraphicsBox[{{{{}, {}, 
+     TagBox[
+      {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], 
+       Opacity[1.], LineBox[CompressedData["
+1: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
+KDj+z8oLKtS3r63djf0/PSv3YA==
+        "]]},
+      Annotation[#, "Charting`Private`Tag$29271#1"]& ]}, {}}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGCQB2IQDQPHywpKg3f320N4Kg5Lr72dK5o+G8o3cRDYUM3o
+ZLsSyrdz8Dz0cdWLucehfBcHne/f2K4mnYXyPR3iXF6Gz1W6AOX7OSjvmlYv
+seAahN8Q6CBzLunES5GHUPkQh2dsT19EfX8MlQ9D5TNEOog+3nf27pGnUPlo
+hyO+u18ptj2Cysc5/AeD+xC+Q4LDVI52l912MPMSHQ6vupd4ou8ehH8gCVU9
+Q4pDeUqn1p7Pt6D6Ux3OzVytuST4CVR/Gpr+dIfpFl6PfWMeQPVnOmj8t3l7
+WRPqHocsVPMash1OJFvl61y7C9Wf43B9lcD52Ttg+vMcajJYEyfIQuUd8h0S
+F1jfbz0LDR+HAlT5BwUOWZ9M9bwEb0DNL0Q1X6HIwX1/h+OXlDtQ+xB8ALBT
+pY4=
+      "]]}, {{}, {}}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"t [\[Mu]s]\"", TraditionalForm], 
+    FormBox["\"P(up)\"", TraditionalForm]},
+  FrameStyle->{
+    Thickness[Large]},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "ScalingFunctions" -> None, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 300}, {0, 1}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0, 0}, {0, 0}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.808664276398569*^9, 3.808664378913704*^9}, {
+   3.8086648618430567`*^9, 3.8086648858248816`*^9}, 3.808665028510069*^9, {
+   3.808665154511345*^9, 3.8086651762112775`*^9}, 3.81610221979073*^9, {
+   3.8161036653466406`*^9, 3.816103675350835*^9}},
+ CellLabel->
+  "Out[223]=",ExpressionUUID->"cb8fbdc1-fcbb-4004-96a0-b7b1b86da19a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"nlmfit", " ", "=", " ", 
+  RowBox[{"NonlinearModelFit", "[", 
+   RowBox[{"pup", ",", " ", 
+    RowBox[{"PBSB", "[", 
+     RowBox[{
+      RowBox[{"\[CapitalOmega]sb", "[", 
+       RowBox[{"\[CapitalOmega]", ",", " ", 
+        RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", "\[Delta]", ",", 
+      RowBox[{"t", " ", 
+       SuperscriptBox["10", 
+        RowBox[{"-", "6"}]]}], ",", "\[Tau]", ",", "nb", ",", " ", 
+      "nlevels"}], "]"}], ",", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"nb", ",", " ", "50"}], "}"}], ",", " ", 
+      RowBox[{"{", 
+       RowBox[{"\[Delta]", ",", " ", 
+        RowBox[{"2", "\[Pi]", " ", "200"}]}], "}"}]}], "}"}], ",", " ", "t", 
+    ",", " ", 
+    RowBox[{"MaxIterations", "\[Rule]", "10000"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.770555258667819*^9, 3.7705552970500145`*^9}, {
+  3.770555389905326*^9, 3.770555391271404*^9}, {3.770555543172092*^9, 
+  3.7705555443801613`*^9}, {3.7705556339322834`*^9, 3.7705556759026837`*^9}, {
+  3.7705557453596563`*^9, 3.770555764597757*^9}, {3.7705558688497195`*^9, 
+  3.7705561039081645`*^9}, {3.7705571025462832`*^9, 3.7705571135999155`*^9}, {
+  3.808664895281576*^9, 3.808664908408451*^9}, {3.808664981082979*^9, 
+  3.8086649949887705`*^9}},
+ CellLabel->"In[57]:=",ExpressionUUID->"3b506a52-a423-46d5-b402-c1e5035049ca"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"1.4969909776458506`*^-299\\\", \\\" \\\", \
+\\\"3.7934242256454324`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 57, 26, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.808664995600133*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"e512ee01-9a9c-4985-8b60-45fc108642fa"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"2.935276426756564`*^-301\\\", \\\" \\\", \
+\\\"3.7718835168903256`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 57, 27, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.8086649956121006`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"8ae2cec6-b09e-4f8e-8d43-83c090b462ca"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"5.755443974032479`*^-303\\\", \\\" \\\", \
+\\\"3.7505860618173104`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 57, 28, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.808664995622074*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"f41e3cee-3409-4121-9b53-c6d72885c120"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"General\\\", \
+\\\"::\\\", \\\"munfl\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 57, 29, 24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.808664995632047*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"35b43881-a6d0-44e5-b5cd-0a66bd8e5ea6"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "NonlinearModelFit", "sszero", 
+   "\"The step size in the search has become less than the tolerance \
+prescribed by the PrecisionGoal option, but the gradient is larger than the \
+tolerance specified by the AccuracyGoal option. There is a possibility that \
+the method has stalled at a point that is not a local minimum.\"", 2, 57, 30, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.8086649960638914`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"bf370815-b617-4eb6-9904-16e60384b288"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"2.0319612793476458`*^-300\\\", \\\" \\\", \
+\\\"3.79569797584318`*^-10\\\"}]\\) is too small to represent as a normalized \
+machine number; precision may be lost.\"", 2, 57, 31, 24442861041629541723, 
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.8086649961386914`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"5822278b-0cf4-4b31-a163-8917e72bfd65"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"3.939029472664441`*^-302\\\", \\\" \\\", \
+\\\"3.7741315100725226`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 57, 32, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.808664996147668*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"1e555080-7493-42a6-8992-1595e888e87b"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"7.635949239889274`*^-304\\\", \\\" \\\", \
+\\\"3.7528087331806165`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 57, 33, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.8086649961576414`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"bef1cc74-b019-4c9b-a06a-5e255aec7676"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"General\\\", \
+\\\"::\\\", \\\"munfl\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 57, 34, 24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{{3.8086649822279167`*^9, 3.8086649961706057`*^9}},
+ CellLabel->
+  "During evaluation of \
+In[57]:=",ExpressionUUID->"bc9eb7f3-58a0-4b80-b529-52cb46702e12"],
+
+Cell[BoxData[
+ TagBox[
+  RowBox[{"FittedModel", "[", 
+   TagBox[
+    PanelBox[
+     TagBox[
+      RowBox[{"0.`", "\[VeryThinSpace]", "+", 
+       RowBox[{"\[LeftSkeleton]", "179", "\[RightSkeleton]"}], "+", 
+       RowBox[{"0.0005830196940164945`", " ", 
+        RowBox[{"(", 
+         RowBox[{"0.5`", "\[VeryThinSpace]", "+", 
+          RowBox[{
+           SuperscriptBox["\[ExponentialE]", 
+            RowBox[{
+             RowBox[{"-", "t"}], "/", "2000"}]], " ", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"-", "0.5`"}], "+", 
+             SuperscriptBox[
+              RowBox[{"Sin", "[", 
+               RowBox[{"0.02602803657933833`", " ", "t"}], "]"}], "2"]}], 
+            ")"}]}]}], ")"}]}]}],
+      Short[#, 2]& ],
+     FrameMargins->5],
+    Editable -> False], "]"}],
+  InterpretTemplate[
+  FittedModel[{
+    "Nonlinear", {$CellContext`nb -> 
+      50.585328148692085`, $CellContext`\[Delta] -> -0.3806097365358493}, \
+{{$CellContext`t}, 
+      1.5054637514203517`*^7 (1 + $CellContext`nb)^(-1) (
+         1.5054637514203517`*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5054637514203517`*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.010927502840704*^7 $CellContext`nb (1 + $CellContext`nb)^(-2) (
+         3.010927502840704*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.010927502840704*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.516391254261054*^7 $CellContext`nb^2 (1 + $CellContext`nb)^(-3) (
+         4.516391254261054*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.516391254261054*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.021855005681407*^7 $CellContext`nb^3 (1 + $CellContext`nb)^(-4) (
+         6.021855005681407*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.021855005681407*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.527318757101761*^7 $CellContext`nb^4 (1 + $CellContext`nb)^(-5) (
+         7.527318757101761*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.527318757101761*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.032782508522108*^7 $CellContext`nb^5 (1 + $CellContext`nb)^(-6) (
+         9.032782508522108*^7 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.032782508522108*^7 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0538246259942465`*^8 $CellContext`nb^6 (1 + $CellContext`nb)^(-7) (
+         1.0538246259942465`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0538246259942465`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2043710011362816`*^8 $CellContext`nb^7 (1 + $CellContext`nb)^(-8) (
+         1.2043710011362816`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2043710011362816`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.3549173762783167`*^8 $CellContext`nb^8 (1 + $CellContext`nb)^(-9) (
+         1.3549173762783167`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.3549173762783167`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.5054637514203522`*^8 $CellContext`nb^9 (1 + $CellContext`nb)^(-10) (
+         1.5054637514203522`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5054637514203522`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.656010126562387*^8 $CellContext`nb^10 (1 + $CellContext`nb)^(-11) (
+         1.656010126562387*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.656010126562387*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8065565017044216`*^8 $CellContext`nb^11 (1 + $CellContext`nb)^(-12) (
+         1.8065565017044216`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8065565017044216`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.957102876846457*^8 $CellContext`nb^12 (1 + $CellContext`nb)^(-13) (
+         1.957102876846457*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.957102876846457*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1076492519884923`*^8 $CellContext`nb^13 (1 + $CellContext`nb)^(-14) (
+         2.1076492519884923`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1076492519884923`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.2581956271305278`*^8 $CellContext`nb^14 (1 + $CellContext`nb)^(-15) (
+         2.2581956271305278`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.2581956271305278`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4087420022725627`*^8 $CellContext`nb^15 (1 + $CellContext`nb)^(-16) (
+         2.4087420022725627`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4087420022725627`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.559288377414598*^8 $CellContext`nb^16 (1 + $CellContext`nb)^(-17) (
+         2.559288377414598*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.559288377414598*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7098347525566334`*^8 $CellContext`nb^17 (1 + $CellContext`nb)^(-18) (
+         2.7098347525566334`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7098347525566334`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.860381127698669*^8 $CellContext`nb^18 (1 + $CellContext`nb)^(-19) (
+         2.860381127698669*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.860381127698669*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.0109275028407043`*^8 $CellContext`nb^19 (1 + $CellContext`nb)^(-20) (
+         3.0109275028407043`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.0109275028407043`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.1614738779827386`*^8 $CellContext`nb^20 (1 + $CellContext`nb)^(-21) (
+         3.1614738779827386`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.1614738779827386`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.3120202531247735`*^8 $CellContext`nb^21 (1 + $CellContext`nb)^(-22) (
+         3.3120202531247735`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.3120202531247735`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.4625666282668084`*^8 $CellContext`nb^22 (1 + $CellContext`nb)^(-23) (
+         3.4625666282668084`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[
+            Rational[
+              1, 2000000] $CellContext`t (
+               3.4625666282668084`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.613113003408843*^8 $CellContext`nb^23 (1 + $CellContext`nb)^(-24) (
+         3.613113003408843*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.613113003408843*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.763659378550879*^8 $CellContext`nb^24 (1 + $CellContext`nb)^(-25) (
+         3.763659378550879*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.763659378550879*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.914205753692915*^8 $CellContext`nb^25 (1 + $CellContext`nb)^(-26) (
+         3.914205753692915*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.914205753692915*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.064752128834949*^8 $CellContext`nb^26 (1 + $CellContext`nb)^(-27) (
+         4.064752128834949*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.064752128834949*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.215298503976986*^8 $CellContext`nb^27 (1 + $CellContext`nb)^(-28) (
+         4.215298503976986*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.215298503976986*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.365844879119019*^8 $CellContext`nb^28 (1 + $CellContext`nb)^(-29) (
+         4.365844879119019*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.365844879119019*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.5163912542610556`*^8 $CellContext`nb^29 (1 + $CellContext`nb)^(-30) (
+         4.5163912542610556`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.5163912542610556`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.666937629403089*^8 $CellContext`nb^30 (1 + $CellContext`nb)^(-31) (
+         4.666937629403089*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.666937629403089*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.8174840045451266`*^8 $CellContext`nb^31 (1 + $CellContext`nb)^(-32) (
+         4.8174840045451266`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.8174840045451266`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      4.9680303796871614`*^8 $CellContext`nb^32 (1 + $CellContext`nb)^(-33) (
+         4.9680303796871614`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               4.9680303796871614`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.1185767548291963`*^8 $CellContext`nb^33 (1 + $CellContext`nb)^(-34) (
+         5.1185767548291963`*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.1185767548291963`*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.269123129971232*^8 $CellContext`nb^34 (1 + $CellContext`nb)^(-35) (
+         5.269123129971232*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.269123129971232*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.419669505113267*^8 $CellContext`nb^35 (1 + $CellContext`nb)^(-36) (
+         5.419669505113267*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.419669505113267*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.570215880255301*^8 $CellContext`nb^36 (1 + $CellContext`nb)^(-37) (
+         5.570215880255301*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.570215880255301*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.720762255397335*^8 $CellContext`nb^37 (1 + $CellContext`nb)^(-38) (
+         5.720762255397335*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.720762255397335*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      5.871308630539373*^8 $CellContext`nb^38 (1 + $CellContext`nb)^(-39) (
+         5.871308630539373*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               5.871308630539373*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.021855005681409*^8 $CellContext`nb^39 (1 + $CellContext`nb)^(-40) (
+         6.021855005681409*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.021855005681409*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.172401380823442*^8 $CellContext`nb^40 (1 + $CellContext`nb)^(-41) (
+         6.172401380823442*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.172401380823442*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.322947755965478*^8 $CellContext`nb^41 (1 + $CellContext`nb)^(-42) (
+         6.322947755965478*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.322947755965478*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.473494131107512*^8 $CellContext`nb^42 (1 + $CellContext`nb)^(-43) (
+         6.473494131107512*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.473494131107512*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.624040506249548*^8 $CellContext`nb^43 (1 + $CellContext`nb)^(-44) (
+         6.624040506249548*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.624040506249548*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.774586881391584*^8 $CellContext`nb^44 (1 + $CellContext`nb)^(-45) (
+         6.774586881391584*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.774586881391584*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      6.925133256533617*^8 $CellContext`nb^45 (1 + $CellContext`nb)^(-46) (
+         6.925133256533617*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               6.925133256533617*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.075679631675653*^8 $CellContext`nb^46 (1 + $CellContext`nb)^(-47) (
+         7.075679631675653*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.075679631675653*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.226226006817687*^8 $CellContext`nb^47 (1 + $CellContext`nb)^(-48) (
+         7.226226006817687*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.226226006817687*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.376772381959724*^8 $CellContext`nb^48 (1 + $CellContext`nb)^(-49) (
+         7.376772381959724*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.376772381959724*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.527318757101758*^8 $CellContext`nb^49 (1 + $CellContext`nb)^(-50) (
+         7.527318757101758*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.527318757101758*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.677865132243794*^8 $CellContext`nb^50 (1 + $CellContext`nb)^(-51) (
+         7.677865132243794*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.677865132243794*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.828411507385828*^8 $CellContext`nb^51 (1 + $CellContext`nb)^(-52) (
+         7.828411507385828*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.828411507385828*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      7.978957882527863*^8 $CellContext`nb^52 (1 + $CellContext`nb)^(-53) (
+         7.978957882527863*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               7.978957882527863*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.1295042576699*^8 $CellContext`nb^53 (1 + $CellContext`nb)^(-54) (
+         8.1295042576699*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.1295042576699*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.280050632811934*^8 $CellContext`nb^54 (1 + $CellContext`nb)^(-55) (
+         8.280050632811934*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.280050632811934*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.430597007953969*^8 $CellContext`nb^55 (1 + $CellContext`nb)^(-56) (
+         8.430597007953969*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.430597007953969*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.581143383096005*^8 $CellContext`nb^56 (1 + $CellContext`nb)^(-57) (
+         8.581143383096005*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.581143383096005*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.73168975823804*^8 $CellContext`nb^57 (1 + $CellContext`nb)^(-58) (
+         8.73168975823804*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.73168975823804*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      8.882236133380076*^8 $CellContext`nb^58 (1 + $CellContext`nb)^(-59) (
+         8.882236133380076*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               8.882236133380076*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.032782508522111*^8 $CellContext`nb^59 (1 + $CellContext`nb)^(-60) (
+         9.032782508522111*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.032782508522111*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.183328883664144*^8 $CellContext`nb^60 (1 + $CellContext`nb)^(-61) (
+         9.183328883664144*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.183328883664144*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.333875258806181*^8 $CellContext`nb^61 (1 + $CellContext`nb)^(-62) (
+         9.333875258806181*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.333875258806181*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.484421633948218*^8 $CellContext`nb^62 (1 + $CellContext`nb)^(-63) (
+         9.484421633948218*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.484421633948218*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.634968009090251*^8 $CellContext`nb^63 (1 + $CellContext`nb)^(-64) (
+         9.634968009090251*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.634968009090251*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.785514384232284*^8 $CellContext`nb^64 (1 + $CellContext`nb)^(-65) (
+         9.785514384232284*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.785514384232284*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      9.936060759374322*^8 $CellContext`nb^65 (1 + $CellContext`nb)^(-66) (
+         9.936060759374322*^8 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               9.936060759374322*^8 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0086607134516358`*^9 $CellContext`nb^66 (1 + $CellContext`nb)^(-67) (
+         1.0086607134516358`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0086607134516358`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0237153509658391`*^9 $CellContext`nb^67 (1 + $CellContext`nb)^(-68) (
+         1.0237153509658391`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0237153509658391`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0387699884800426`*^9 $CellContext`nb^68 (1 + $CellContext`nb)^(-69) (
+         1.0387699884800426`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0387699884800426`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0538246259942461`*^9 $CellContext`nb^69 (1 + $CellContext`nb)^(-70) (
+         1.0538246259942461`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0538246259942461`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0688792635084498`*^9 $CellContext`nb^70 (1 + $CellContext`nb)^(-71) (
+         1.0688792635084498`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0688792635084498`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0839339010226533`*^9 $CellContext`nb^71 (1 + $CellContext`nb)^(-72) (
+         1.0839339010226533`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0839339010226533`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.0989885385368564`*^9 $CellContext`nb^72 (1 + $CellContext`nb)^(-73) (
+         1.0989885385368564`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.0989885385368564`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.11404317605106*^9 $CellContext`nb^73 (1 + $CellContext`nb)^(-74) (
+         1.11404317605106*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.11404317605106*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.1290978135652635`*^9 $CellContext`nb^74 (1 + $CellContext`nb)^(-75) (
+         1.1290978135652635`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[
+            Rational[
+              1, 2000000] $CellContext`t (
+               1.1290978135652635`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.1441524510794675`*^9 $CellContext`nb^75 (1 + $CellContext`nb)^(-76) (
+         1.1441524510794675`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.1441524510794675`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.159207088593671*^9 $CellContext`nb^76 (1 + $CellContext`nb)^(-77) (
+         1.159207088593671*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.159207088593671*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.1742617261078746`*^9 $CellContext`nb^77 (1 + $CellContext`nb)^(-78) (
+         1.1742617261078746`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.1742617261078746`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.189316363622078*^9 $CellContext`nb^78 (1 + $CellContext`nb)^(-79) (
+         1.189316363622078*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.189316363622078*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2043710011362817`*^9 $CellContext`nb^79 (1 + $CellContext`nb)^(-80) (
+         1.2043710011362817`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2043710011362817`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.219425638650485*^9 $CellContext`nb^80 (1 + $CellContext`nb)^(-81) (
+         1.219425638650485*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.219425638650485*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2344802761646888`*^9 $CellContext`nb^81 (1 + $CellContext`nb)^(-82) (
+         1.2344802761646888`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2344802761646888`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2495349136788921`*^9 $CellContext`nb^82 (1 + $CellContext`nb)^(-83) (
+         1.2495349136788921`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2495349136788921`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2645895511930954`*^9 $CellContext`nb^83 (1 + $CellContext`nb)^(-84) (
+         1.2645895511930954`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2645895511930954`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.279644188707299*^9 $CellContext`nb^84 (1 + $CellContext`nb)^(-85) (
+         1.279644188707299*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.279644188707299*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.2946988262215025`*^9 $CellContext`nb^85 (1 + $CellContext`nb)^(-86) (
+         1.2946988262215025`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.2946988262215025`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.3097534637357063`*^9 $CellContext`nb^86 (1 + $CellContext`nb)^(-87) (
+         1.3097534637357063`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.3097534637357063`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.3248081012499094`*^9 $CellContext`nb^87 (1 + $CellContext`nb)^(-88) (
+         1.3248081012499094`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.3248081012499094`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.3398627387641125`*^9 $CellContext`nb^88 (1 + $CellContext`nb)^(-89) (
+         1.3398627387641125`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.3398627387641125`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.354917376278317*^9 $CellContext`nb^89 (1 + $CellContext`nb)^(-90) (
+         1.354917376278317*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.354917376278317*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.36997201379252*^9 $CellContext`nb^90 (1 + $CellContext`nb)^(-91) (
+         1.36997201379252*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.36997201379252*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.3850266513067234`*^9 $CellContext`nb^91 (1 + $CellContext`nb)^(-92) (
+         1.3850266513067234`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.3850266513067234`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.400081288820927*^9 $CellContext`nb^92 (1 + $CellContext`nb)^(-93) (
+         1.400081288820927*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.400081288820927*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.415135926335131*^9 $CellContext`nb^93 (1 + $CellContext`nb)^(-94) (
+         1.415135926335131*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.415135926335131*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.4301905638493338`*^9 $CellContext`nb^94 (1 + $CellContext`nb)^(-95) (
+         1.4301905638493338`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.4301905638493338`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.4452452013635373`*^9 $CellContext`nb^95 (1 + $CellContext`nb)^(-96) (
+         1.4452452013635373`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.4452452013635373`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.460299838877741*^9 $CellContext`nb^96 (1 + $CellContext`nb)^(-97) (
+         1.460299838877741*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.460299838877741*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.4753544763919454`*^9 $CellContext`nb^97 (1 + $CellContext`nb)^(-98) (
+         1.4753544763919454`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.4753544763919454`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.4904091139061482`*^9 $CellContext`nb^98 (1 + $CellContext`nb)^(-99) (
+         1.4904091139061482`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.4904091139061482`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.5054637514203515`*^9 $CellContext`nb^99 (1 + $CellContext`nb)^(-100) (
+         1.5054637514203515`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5054637514203515`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.520518388934555*^9 $CellContext`nb^100 (1 + $CellContext`nb)^(-101) (
+         1.520518388934555*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.520518388934555*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.5355730264487588`*^9 $CellContext`nb^101 (
+         1 + $CellContext`nb)^(-102) (
+         1.5355730264487588`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5355730264487588`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.5506276639629624`*^9 $CellContext`nb^102 (
+         1 + $CellContext`nb)^(-103) (
+         1.5506276639629624`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5506276639629624`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.565682301477166*^9 $CellContext`nb^103 (1 + $CellContext`nb)^(-104) (
+         1.565682301477166*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.565682301477166*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.580736938991369*^9 $CellContext`nb^104 (1 + $CellContext`nb)^(-105) (
+         1.580736938991369*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.580736938991369*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.5957915765055733`*^9 $CellContext`nb^105 (
+         1 + $CellContext`nb)^(-106) (
+         1.5957915765055733`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.5957915765055733`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6108462140197763`*^9 $CellContext`nb^106 (
+         1 + $CellContext`nb)^(-107) (
+         1.6108462140197763`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6108462140197763`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6259008515339797`*^9 $CellContext`nb^107 (
+         1 + $CellContext`nb)^(-108) (
+         1.6259008515339797`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6259008515339797`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6409554890481832`*^9 $CellContext`nb^108 (
+         1 + $CellContext`nb)^(-109) (
+         1.6409554890481832`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6409554890481832`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6560101265623865`*^9 $CellContext`nb^109 (
+         1 + $CellContext`nb)^(-110) (
+         1.6560101265623865`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6560101265623865`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6710647640765903`*^9 $CellContext`nb^110 (
+         1 + $CellContext`nb)^(-111) (
+         1.6710647640765903`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6710647640765903`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.6861194015907943`*^9 $CellContext`nb^111 (
+         1 + $CellContext`nb)^(-112) (
+         1.6861194015907943`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.6861194015907943`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7011740391049974`*^9 $CellContext`nb^112 (
+         1 + $CellContext`nb)^(-113) (
+         1.7011740391049974`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7011740391049974`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.716228676619201*^9 $CellContext`nb^113 (1 + $CellContext`nb)^(-114) (
+         1.716228676619201*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.716228676619201*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7312833141334045`*^9 $CellContext`nb^114 (
+         1 + $CellContext`nb)^(-115) (
+         1.7312833141334045`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7312833141334045`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7463379516476076`*^9 $CellContext`nb^115 (
+         1 + $CellContext`nb)^(-116) (
+         1.7463379516476076`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7463379516476076`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7613925891618114`*^9 $CellContext`nb^116 (
+         1 + $CellContext`nb)^(-117) (
+         1.7613925891618114`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7613925891618114`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7764472266760147`*^9 $CellContext`nb^117 (
+         1 + $CellContext`nb)^(-118) (
+         1.7764472266760147`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7764472266760147`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.7915018641902182`*^9 $CellContext`nb^118 (
+         1 + $CellContext`nb)^(-119) (
+         1.7915018641902182`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.7915018641902182`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8065565017044222`*^9 $CellContext`nb^119 (
+         1 + $CellContext`nb)^(-120) (
+         1.8065565017044222`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[
+            Rational[
+              1, 2000000] $CellContext`t (
+               1.8065565017044222`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8216111392186258`*^9 $CellContext`nb^120 (
+         1 + $CellContext`nb)^(-121) (
+         1.8216111392186258`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8216111392186258`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.836665776732829*^9 $CellContext`nb^121 (1 + $CellContext`nb)^(-122) (
+         1.836665776732829*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.836665776732829*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8517204142470329`*^9 $CellContext`nb^122 (
+         1 + $CellContext`nb)^(-123) (
+         1.8517204142470329`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8517204142470329`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8667750517612357`*^9 $CellContext`nb^123 (
+         1 + $CellContext`nb)^(-124) (
+         1.8667750517612357`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8667750517612357`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8818296892754395`*^9 $CellContext`nb^124 (
+         1 + $CellContext`nb)^(-125) (
+         1.8818296892754395`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8818296892754395`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.8968843267896433`*^9 $CellContext`nb^125 (
+         1 + $CellContext`nb)^(-126) (
+         1.8968843267896433`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.8968843267896433`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.9119389643038464`*^9 $CellContext`nb^126 (
+         1 + $CellContext`nb)^(-127) (
+         1.9119389643038464`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.9119389643038464`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.9269936018180506`*^9 $CellContext`nb^127 (
+         1 + $CellContext`nb)^(-128) (
+         1.9269936018180506`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.9269936018180506`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.9420482393322537`*^9 $CellContext`nb^128 (
+         1 + $CellContext`nb)^(-129) (
+         1.9420482393322537`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.9420482393322537`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.9571028768464568`*^9 $CellContext`nb^129 (
+         1 + $CellContext`nb)^(-130) (
+         1.9571028768464568`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.9571028768464568`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.972157514360661*^9 $CellContext`nb^130 (1 + $CellContext`nb)^(-131) (
+         1.972157514360661*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.972157514360661*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      1.9872121518748646`*^9 $CellContext`nb^131 (
+         1 + $CellContext`nb)^(-132) (
+         1.9872121518748646`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               1.9872121518748646`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0022667893890681`*^9 $CellContext`nb^132 (
+         1 + $CellContext`nb)^(-133) (
+         2.0022667893890681`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0022667893890681`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0173214269032712`*^9 $CellContext`nb^133 (
+         1 + $CellContext`nb)^(-134) (
+         2.0173214269032712`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0173214269032712`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.032376064417475*^9 $CellContext`nb^134 (1 + $CellContext`nb)^(-135) (
+         2.032376064417475*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.032376064417475*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0474307019316785`*^9 $CellContext`nb^135 (
+         1 + $CellContext`nb)^(-136) (
+         2.0474307019316785`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0474307019316785`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0624853394458818`*^9 $CellContext`nb^136 (
+         1 + $CellContext`nb)^(-137) (
+         2.0624853394458818`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0624853394458818`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0775399769600852`*^9 $CellContext`nb^137 (
+         1 + $CellContext`nb)^(-138) (
+         2.0775399769600852`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0775399769600852`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.0925946144742885`*^9 $CellContext`nb^138 (
+         1 + $CellContext`nb)^(-139) (
+         2.0925946144742885`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.0925946144742885`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1076492519884927`*^9 $CellContext`nb^139 (
+         1 + $CellContext`nb)^(-140) (
+         2.1076492519884927`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1076492519884927`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1227038895026956`*^9 $CellContext`nb^140 (
+         1 + $CellContext`nb)^(-141) (
+         2.1227038895026956`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1227038895026956`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1377585270168993`*^9 $CellContext`nb^141 (
+         1 + $CellContext`nb)^(-142) (
+         2.1377585270168993`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1377585270168993`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1528131645311036`*^9 $CellContext`nb^142 (
+         1 + $CellContext`nb)^(-143) (
+         2.1528131645311036`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1528131645311036`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1678678020453067`*^9 $CellContext`nb^143 (
+         1 + $CellContext`nb)^(-144) (
+         2.1678678020453067`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1678678020453067`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1829224395595098`*^9 $CellContext`nb^144 (
+         1 + $CellContext`nb)^(-145) (
+         2.1829224395595098`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1829224395595098`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.1979770770737133`*^9 $CellContext`nb^145 (
+         1 + $CellContext`nb)^(-146) (
+         2.1979770770737133`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.1979770770737133`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.2130317145879173`*^9 $CellContext`nb^146 (
+         1 + $CellContext`nb)^(-147) (
+         2.2130317145879173`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.2130317145879173`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.2280863521021204`*^9 $CellContext`nb^147 (
+         1 + $CellContext`nb)^(-148) (
+         2.2280863521021204`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.2280863521021204`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.2431409896163235`*^9 $CellContext`nb^148 (
+         1 + $CellContext`nb)^(-149) (
+         2.2431409896163235`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.2431409896163235`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.2581956271305265`*^9 $CellContext`nb^149 (
+         1 + $CellContext`nb)^(-150) (
+         2.2581956271305265`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.2581956271305265`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.273250264644731*^9 $CellContext`nb^150 (1 + $CellContext`nb)^(-151) (
+         2.273250264644731*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.273250264644731*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.288304902158934*^9 $CellContext`nb^151 (1 + $CellContext`nb)^(-152) (
+         2.288304902158934*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[
+            Rational[
+              1, 2000000] $CellContext`t (
+               2.288304902158934*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.3033595396731386`*^9 $CellContext`nb^152 (
+         1 + $CellContext`nb)^(-153) (
+         2.3033595396731386`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.3033595396731386`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.3184141771873417`*^9 $CellContext`nb^153 (
+         1 + $CellContext`nb)^(-154) (
+         2.3184141771873417`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.3184141771873417`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.333468814701545*^9 $CellContext`nb^154 (1 + $CellContext`nb)^(-155) (
+         2.333468814701545*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.333468814701545*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.3485234522157493`*^9 $CellContext`nb^155 (
+         1 + $CellContext`nb)^(-156) (
+         2.3485234522157493`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.3485234522157493`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.3635780897299523`*^9 $CellContext`nb^156 (
+         1 + $CellContext`nb)^(-157) (
+         2.3635780897299523`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.3635780897299523`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.378632727244156*^9 $CellContext`nb^157 (1 + $CellContext`nb)^(-158) (
+         2.378632727244156*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.378632727244156*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.393687364758359*^9 $CellContext`nb^158 (1 + $CellContext`nb)^(-159) (
+         2.393687364758359*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.393687364758359*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4087420022725635`*^9 $CellContext`nb^159 (
+         1 + $CellContext`nb)^(-160) (
+         2.4087420022725635`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4087420022725635`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4237966397867665`*^9 $CellContext`nb^160 (
+         1 + $CellContext`nb)^(-161) (
+         2.4237966397867665`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4237966397867665`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4388512773009706`*^9 $CellContext`nb^161 (
+         1 + $CellContext`nb)^(-162) (
+         2.4388512773009706`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4388512773009706`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4539059148151727`*^9 $CellContext`nb^162 (
+         1 + $CellContext`nb)^(-163) (
+         2.4539059148151727`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4539059148151727`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4689605523293767`*^9 $CellContext`nb^163 (
+         1 + $CellContext`nb)^(-164) (
+         2.4689605523293767`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4689605523293767`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4840151898435802`*^9 $CellContext`nb^164 (
+         1 + $CellContext`nb)^(-165) (
+         2.4840151898435802`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4840151898435802`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.4990698273577843`*^9 $CellContext`nb^165 (
+         1 + $CellContext`nb)^(-166) (
+         2.4990698273577843`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.4990698273577843`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.514124464871988*^9 $CellContext`nb^166 (1 + $CellContext`nb)^(-167) (
+         2.514124464871988*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.514124464871988*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.5291791023861914`*^9 $CellContext`nb^167 (
+         1 + $CellContext`nb)^(-168) (
+         2.5291791023861914`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.5291791023861914`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.5442337399003944`*^9 $CellContext`nb^168 (
+         1 + $CellContext`nb)^(-169) (
+         2.5442337399003944`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.5442337399003944`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.559288377414598*^9 $CellContext`nb^169 (1 + $CellContext`nb)^(-170) (
+         2.559288377414598*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.559288377414598*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.574343014928802*^9 $CellContext`nb^170 (1 + $CellContext`nb)^(-171) (
+         2.574343014928802*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.574343014928802*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.5893976524430046`*^9 $CellContext`nb^171 (
+         1 + $CellContext`nb)^(-172) (
+         2.5893976524430046`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.5893976524430046`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.604452289957208*^9 $CellContext`nb^172 (1 + $CellContext`nb)^(-173) (
+         2.604452289957208*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.604452289957208*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.619506927471412*^9 $CellContext`nb^173 (1 + $CellContext`nb)^(-174) (
+         2.619506927471412*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.619506927471412*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.6345615649856157`*^9 $CellContext`nb^174 (
+         1 + $CellContext`nb)^(-175) (
+         2.6345615649856157`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.6345615649856157`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.6496162024998193`*^9 $CellContext`nb^175 (
+         1 + $CellContext`nb)^(-176) (
+         2.6496162024998193`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.6496162024998193`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.664670840014023*^9 $CellContext`nb^176 (1 + $CellContext`nb)^(-177) (
+         2.664670840014023*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.664670840014023*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.679725477528226*^9 $CellContext`nb^177 (1 + $CellContext`nb)^(-178) (
+         2.679725477528226*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.679725477528226*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.69478011504243*^9 $CellContext`nb^178 (1 + $CellContext`nb)^(-179) (
+         2.69478011504243*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.69478011504243*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7098347525566335`*^9 $CellContext`nb^179 (
+         1 + $CellContext`nb)^(-180) (
+         2.7098347525566335`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7098347525566335`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7248893900708365`*^9 $CellContext`nb^180 (
+         1 + $CellContext`nb)^(-181) (
+         2.7248893900708365`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7248893900708365`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.73994402758504*^9 $CellContext`nb^181 (1 + $CellContext`nb)^(-182) (
+         2.73994402758504*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.73994402758504*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7549986650992436`*^9 $CellContext`nb^182 (
+         1 + $CellContext`nb)^(-183) (
+         2.7549986650992436`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7549986650992436`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7700533026134467`*^9 $CellContext`nb^183 (
+         1 + $CellContext`nb)^(-184) (
+         2.7700533026134467`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7700533026134467`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.7851079401276507`*^9 $CellContext`nb^184 (
+         1 + $CellContext`nb)^(-185) (
+         2.7851079401276507`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.7851079401276507`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.8001625776418543`*^9 $CellContext`nb^185 (
+         1 + $CellContext`nb)^(-186) (
+         2.8001625776418543`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.8001625776418543`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.815217215156058*^9 $CellContext`nb^186 (1 + $CellContext`nb)^(-187) (
+         2.815217215156058*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.815217215156058*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.8302718526702614`*^9 $CellContext`nb^187 (
+         1 + $CellContext`nb)^(-188) (
+         2.8302718526702614`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.8302718526702614`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.845326490184465*^9 $CellContext`nb^188 (1 + $CellContext`nb)^(-189) (
+         2.845326490184465*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.845326490184465*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.8603811276986685`*^9 $CellContext`nb^189 (
+         1 + $CellContext`nb)^(-190) (
+         2.8603811276986685`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.8603811276986685`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.875435765212872*^9 $CellContext`nb^190 (1 + $CellContext`nb)^(-191) (
+         2.875435765212872*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.875435765212872*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.8904904027270746`*^9 $CellContext`nb^191 (
+         1 + $CellContext`nb)^(-192) (
+         2.8904904027270746`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.8904904027270746`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.905545040241278*^9 $CellContext`nb^192 (1 + $CellContext`nb)^(-193) (
+         2.905545040241278*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.905545040241278*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.920599677755482*^9 $CellContext`nb^193 (1 + $CellContext`nb)^(-194) (
+         2.920599677755482*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.920599677755482*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.9356543152696853`*^9 $CellContext`nb^194 (
+         1 + $CellContext`nb)^(-195) (
+         2.9356543152696853`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.9356543152696853`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.95070895278389*^9 $CellContext`nb^195 (1 + $CellContext`nb)^(-196) (
+         2.95070895278389*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.95070895278389*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.965763590298093*^9 $CellContext`nb^196 (1 + $CellContext`nb)^(-197) (
+         2.965763590298093*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.965763590298093*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.980818227812297*^9 $CellContext`nb^197 (1 + $CellContext`nb)^(-198) (
+         2.980818227812297*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.980818227812297*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      2.9958728653265*^9 $CellContext`nb^198 (1 + $CellContext`nb)^(-199) (
+         2.9958728653265*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               2.9958728653265*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.010927502840703*^9 $CellContext`nb^199 (1 + $CellContext`nb)^(-200) (
+         3.010927502840703*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.010927502840703*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2)) + 
+      3.0259821403549075`*^9 $CellContext`nb^200 (
+         1 + $CellContext`nb)^(-201) (
+         3.0259821403549075`*^9 + $CellContext`\[Delta]^2)^(-1) (0.5 + 
+        E^(Rational[-1, 2000] $CellContext`t) (-0.5 + 
+          Sin[Rational[
+              1, 2000000] $CellContext`t (
+               3.0259821403549075`*^9 + $CellContext`\[Delta]^2)^
+              Rational[1, 2]]^2))}}, {1}, {0.01549401476045932, 
+    0.026760423435425413`, 0.049295485192345834`, 0.18450649592297655`, 
+    0.2295786174781197, 0.25211270890310356`, 0.3535214658722074, 
+    0.533802882555793, 0.6239447163318033, 0.6239447163318033, 
+    0.6802815454931045, 0.5788735947229999, 0.49999999999999994`, 
+    0.6014076555659523, 0.477464767051668, 0.49999999999999994`, 
+    0.421126405277, 0.6352101148484566, 0.477464767051668, 0.5112676085716598,
+     0.5676059373435907, 0.421126405277, 0.466197117444207, 
+    0.5225352329483383, 0.45492944216460507`, 0.556338249208249, 
+    0.45492944216460507`, 0.37605528366819974`, 0.466197117444207, 
+    0.44366175079175146`, 0.44366175079175146`}, 
+    Function[Null, 
+     Internal`LocalizedBlock[{$CellContext`nb, $CellContext`t, $CellContext`\
+\[Delta]}, #], {HoldAll}], MaxIterations -> 10000]& ],
+  Editable->False,
+  SelectWithContents->True,
+  Selectable->True]], "Output",
+ CellChangeTimes->{{3.8086649823406143`*^9, 3.8086649961995287`*^9}},
+ CellLabel->"Out[57]=",ExpressionUUID->"09e5ffc8-0b56-498e-8acf-bd16c0aa0164"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"nlmfit", "[", "\"\<BestFitParameters\>\"", "]"}], "//", 
+  "Normal"}]], "Input",
+ CellLabel->"In[58]:=",ExpressionUUID->"7180250d-28f7-4e18-ae6d-ebfa4bfe58bf"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"2.0319612793476458`*^-300\\\", \\\" \\\", \
+\\\"3.79569797584318`*^-10\\\"}]\\) is too small to represent as a normalized \
+machine number; precision may be lost.\"", 2, 58, 35, 24442861041629541723, 
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.80866491080005*^9, 3.8086650002596655`*^9},
+ CellLabel->
+  "During evaluation of \
+In[58]:=",ExpressionUUID->"0718405a-01f7-4df9-83bc-afd4374f4dd1"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"3.939029472664441`*^-302\\\", \\\" \\\", \
+\\\"3.7741315100725226`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 58, 36, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.80866491080005*^9, 3.808665000271632*^9},
+ CellLabel->
+  "During evaluation of \
+In[58]:=",ExpressionUUID->"1987e765-7c0b-41bd-807d-919ad5a61b2a"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"7.635949239889274`*^-304\\\", \\\" \\\", \
+\\\"3.7528087331806165`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 58, 37, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.80866491080005*^9, 3.808665000280608*^9},
+ CellLabel->
+  "During evaluation of \
+In[58]:=",ExpressionUUID->"821b3ae7-f713-4c9a-84c2-78329547fad7"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"General\\\", \
+\\\"::\\\", \\\"munfl\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 58, 38, 24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.80866491080005*^9, 3.808665000289584*^9},
+ CellLabel->
+  "During evaluation of \
+In[58]:=",ExpressionUUID->"669d6d1c-5606-480f-a101-f7017e1f552c"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"nb", "\[Rule]", "50.585328148692085`"}], ",", 
+   RowBox[{"\[Delta]", "\[Rule]", 
+    RowBox[{"-", "0.3806097365358493`"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{3.8086649108459272`*^9, 3.8086650003005548`*^9},
+ CellLabel->"Out[58]=",ExpressionUUID->"ee9fea62-fe02-4090-94f9-9666c52e747a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"nlmfit", "[", "\"\<BestFitParameters\>\"", "]"}], "//", 
+  "Normal"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Show", "[", 
+   RowBox[{
+    RowBox[{"Plot", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"PBSB", "[", 
+        RowBox[{
+         RowBox[{"\[CapitalOmega]sb", "[", 
+          RowBox[{"\[CapitalOmega]", ",", " ", 
+           RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", "0", ",", 
+         RowBox[{"t", " ", 
+          SuperscriptBox["10", 
+           RowBox[{"-", "6"}]]}], ",", "\[Tau]", ",", "55", ",", " ", 
+         "nlevels"}], "]"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"t", ",", "0", ",", 
+        RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", "  ", 
+      RowBox[{"PlotRange", "\[Rule]", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", " ", 
+           RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", " ", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+    RowBox[{"ListPlot", "[", 
+     RowBox[{"Transpose", "[", 
+      RowBox[{"{", 
+       RowBox[{"xList", ",", " ", "pup"}], "}"}], "]"}], "]"}], ",", " ", 
+    RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
+    RowBox[{"FrameLabel", "\[Rule]", " ", 
+     RowBox[{"{", 
+      RowBox[{"\"\<t [\[Mu]s]\>\"", ",", " ", "\"\<P(up)\>\""}], "}"}]}], ",",
+     " ", 
+    RowBox[{"FrameStyle", "\[Rule]", " ", 
+     RowBox[{"{", " ", "Thick", "}"}]}]}], "]"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{"Show", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"PBSB", "[", 
+       RowBox[{
+        RowBox[{"\[CapitalOmega]sb", "[", 
+         RowBox[{"\[CapitalOmega]", ",", " ", 
+          RowBox[{"\[Eta]", "[", "\[Nu]", "]"}]}], "]"}], ",", "2500", ",", 
+        RowBox[{"t", " ", 
+         SuperscriptBox["10", 
+          RowBox[{"-", "6"}]]}], ",", "\[Tau]", ",", "nbar", ",", " ", 
+        "nlevels"}], "]"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"t", ",", "0", ",", 
+       RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", "  ", 
+     RowBox[{"PlotRange", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", 
+          RowBox[{"Max", "[", "xList", "]"}]}], "}"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"0", ",", " ", "1"}], "}"}]}], "}"}]}]}], "]"}], ",", 
+   RowBox[{"ListPlot", "[", 
+    RowBox[{"Transpose", "[", 
+     RowBox[{"{", 
+      RowBox[{"xList", ",", " ", "pup"}], "}"}], "]"}], "]"}], ",", " ", 
+   RowBox[{"Frame", "\[Rule]", " ", "True"}], ",", " ", 
+   RowBox[{"FrameLabel", "\[Rule]", " ", 
+    RowBox[{"{", 
+     RowBox[{"\"\<t [\[Mu]s]\>\"", ",", " ", "\"\<P(up)\>\""}], "}"}]}], ",", 
+   " ", 
+   RowBox[{"FrameStyle", "\[Rule]", " ", 
+    RowBox[{"{", " ", "Thick", "}"}]}]}], "]"}]}], "Input",
+ CellChangeTimes->{{3.7705561114765973`*^9, 3.770556134309903*^9}, {
+  3.7705571258436155`*^9, 3.770557127753725*^9}},
+ CellLabel->"In[59]:=",ExpressionUUID->"2031a918-b7fc-442a-a958-c0fc2f10e678"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"2.0319612793476458`*^-300\\\", \\\" \\\", \
+\\\"3.79569797584318`*^-10\\\"}]\\) is too small to represent as a normalized \
+machine number; precision may be lost.\"", 2, 59, 39, 24442861041629541723, 
+   "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8086642397097445`*^9, 3.8086649193023*^9, 
+  3.8086650041741896`*^9},
+ CellLabel->
+  "During evaluation of \
+In[59]:=",ExpressionUUID->"4e42435b-719d-4c0a-a886-4a6ef9f92244"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"3.939029472664441`*^-302\\\", \\\" \\\", \
+\\\"3.7741315100725226`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 59, 40, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8086642397097445`*^9, 3.8086649193023*^9, 
+  3.808665004206105*^9},
+ CellLabel->
+  "During evaluation of \
+In[59]:=",ExpressionUUID->"484f2f9a-ddde-4aa1-86ac-1213ba8d563e"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "munfl", 
+   "\"\\!\\(\\*RowBox[{\\\"7.635949239889274`*^-304\\\", \\\" \\\", \
+\\\"3.7528087331806165`*^-10\\\"}]\\) is too small to represent as a \
+normalized machine number; precision may be lost.\"", 2, 59, 41, 
+   24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8086642397097445`*^9, 3.8086649193023*^9, 
+  3.808665004225053*^9},
+ CellLabel->
+  "During evaluation of \
+In[59]:=",ExpressionUUID->"1b9b272f-410f-43da-9f35-98b2eb9dcefd"],
+
+Cell[BoxData[
+ TemplateBox[{
+  "General", "stop", 
+   "\"Further output of \\!\\(\\*StyleBox[RowBox[{\\\"General\\\", \
+\\\"::\\\", \\\"munfl\\\"}], \\\"MessageName\\\"]\\) will be suppressed \
+during this calculation.\"", 2, 59, 42, 24442861041629541723, "Local"},
+  "MessageTemplate"]], "Message", "MSG",
+ CellChangeTimes->{3.8086642397097445`*^9, 3.8086649193023*^9, 
+  3.808665004245*^9},
+ CellLabel->
+  "During evaluation of \
+In[59]:=",ExpressionUUID->"8adff528-4627-42c0-9bb2-218db676a321"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"nb", "\[Rule]", "50.585328148692085`"}], ",", 
+   RowBox[{"\[Delta]", "\[Rule]", 
+    RowBox[{"-", "0.3806097365358493`"}]}]}], "}"}]], "Output",
+ CellChangeTimes->{{3.77055611344771*^9, 3.7705561349989424`*^9}, 
+   3.7705570814660773`*^9, {3.7705571174131336`*^9, 3.7705571287127795`*^9}, 
+   3.8086642397985077`*^9, 3.8086649193830824`*^9, 3.808665004266941*^9},
+ CellLabel->"Out[59]=",ExpressionUUID->"53efae7b-3deb-4aca-a156-1bc13fba0d64"],
+
+Cell[BoxData[
+ GraphicsBox[{{{{}, {}, 
+     TagBox[
+      {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], 
+       Opacity[1.], LineBox[CompressedData["
+1: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
+        "]]},
+      Annotation[#, "Charting`Private`Tag$16031#1"]& ]}, {}}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGCQB2IQDQPHywpKg3f320N4Kg5Lr72dK5o+G8o3cRDYUM3o
+ZLsSyrdz8Dz0cdWLucehfBcHne/f2K4mnYXyPR3iXF6Gz1W6AOX7OSjvmlYv
+seAahN8Q6CBzLunES5GHUPkQh2dsT19EfX8MlQ9D5TNEOog+3nf27pGnUPlo
+hyO+u18ptj2Cysc5/AeD+xC+Q4LDVI52l912MPMSHQ6vupd4ou8ehH8gCVU9
+Q4pDeUqn1p7Pt6D6Ux3OzVytuST4CVR/Gpr+dIfpFl6PfWMeQPVnOmj8t3l7
+WRPqHocsVPMash1OJFvl61y7C9Wf43B9lcD52Ttg+vMcajJYEyfIQuUd8h0S
+F1jfbz0LDR+HAlT5BwUOWZ9M9bwEb0DNL0Q1X6HIwX1/h+OXlDtQ+xB8ALBT
+pY4=
+      "]]}, {{}, {}}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"t [\[Mu]s]\"", TraditionalForm], 
+    FormBox["\"P(up)\"", TraditionalForm]},
+  FrameStyle->{
+    Thickness[Large]},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "ScalingFunctions" -> None, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 300}, {0, 1}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0, 0}, {0, 0}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.77055611344771*^9, 3.7705561349989424`*^9}, 
+   3.7705570814660773`*^9, {3.7705571174131336`*^9, 3.7705571287127795`*^9}, 
+   3.8086642397985077`*^9, 3.8086649193830824`*^9, 3.808665006939789*^9},
+ CellLabel->"Out[60]=",ExpressionUUID->"28a2f686-a0eb-40b3-9484-c37c4798a0e7"],
+
+Cell[BoxData[
+ GraphicsBox[{{{{}, {}, 
+     TagBox[
+      {RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[1.6], 
+       Opacity[1.], LineBox[CompressedData["
+1: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
+/j9DA8s3VBQZlfrrX70fKPegjZsaqeg/jRxt4Q==
+        "]]},
+      Annotation[#, "Charting`Private`Tag$16115#1"]& ]}, {}}, {{}, 
+    {RGBColor[0.368417, 0.506779, 0.709798], PointSize[0.012833333333333334`],
+      AbsoluteThickness[1.6], PointBox[CompressedData["
+1:eJxTTMoPSmViYGCQB2IQDQPHywpKg3f320N4Kg5Lr72dK5o+G8o3cRDYUM3o
+ZLsSyrdz8Dz0cdWLucehfBcHne/f2K4mnYXyPR3iXF6Gz1W6AOX7OSjvmlYv
+seAahN8Q6CBzLunES5GHUPkQh2dsT19EfX8MlQ9D5TNEOog+3nf27pGnUPlo
+hyO+u18ptj2Cysc5/AeD+xC+Q4LDVI52l912MPMSHQ6vupd4ou8ehH8gCVU9
+Q4pDeUqn1p7Pt6D6Ux3OzVytuST4CVR/Gpr+dIfpFl6PfWMeQPVnOmj8t3l7
+WRPqHocsVPMash1OJFvl61y7C9Wf43B9lcD52Ttg+vMcajJYEyfIQuUd8h0S
+F1jfbz0LDR+HAlT5BwUOWZ9M9bwEb0DNL0Q1X6HIwX1/h+OXlDtQ+xB8ALBT
+pY4=
+      "]]}, {{}, {}}}},
+  AspectRatio->NCache[GoldenRatio^(-1), 0.6180339887498948],
+  Axes->{True, True},
+  AxesLabel->{None, None},
+  AxesOrigin->{0, 0},
+  DisplayFunction->Identity,
+  Frame->True,
+  FrameLabel->{
+    FormBox["\"t [\[Mu]s]\"", TraditionalForm], 
+    FormBox["\"P(up)\"", TraditionalForm]},
+  FrameStyle->{
+    Thickness[Large]},
+  FrameTicks->{{Automatic, Automatic}, {Automatic, Automatic}},
+  GridLines->{None, None},
+  GridLinesStyle->Directive[
+    GrayLevel[0.5, 0.4]],
+  ImagePadding->All,
+  Method->{
+   "DefaultBoundaryStyle" -> Automatic, 
+    "DefaultGraphicsInteraction" -> {
+     "Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+      "Effects" -> {
+       "Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> {"ratio" -> 2}, 
+        "Droplines" -> {
+         "freeformCursorMode" -> True, 
+          "placement" -> {"x" -> "All", "y" -> "None"}}}}, "DefaultMeshStyle" -> 
+    AbsolutePointSize[6], "ScalingFunctions" -> None, 
+    "CoordinatesToolOptions" -> {"DisplayFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& ), "CopiedValueFunction" -> ({
+        (Identity[#]& )[
+         Part[#, 1]], 
+        (Identity[#]& )[
+         Part[#, 2]]}& )}},
+  PlotRange->{{0, 300}, {0, 1}},
+  PlotRangeClipping->True,
+  PlotRangePadding->{{0, 0}, {0, 0}},
+  Ticks->{Automatic, Automatic}]], "Output",
+ CellChangeTimes->{{3.77055611344771*^9, 3.7705561349989424`*^9}, 
+   3.7705570814660773`*^9, {3.7705571174131336`*^9, 3.7705571287127795`*^9}, 
+   3.8086642397985077`*^9, 3.8086649193830824`*^9, 3.8086650106967354`*^9},
+ CellLabel->"Out[61]=",ExpressionUUID->"07d55959-153e-44a0-ae24-d9642e5d5644"]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1920, 997},
+WindowMargins->{{1912, Automatic}, {Automatic, -8}},
+FrontEndVersion->"12.1 for Microsoft Windows (64-bit) (June 19, 2020)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"579115cb-6021-42e9-a486-a39e4437e40c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 206, 4, 28, "Input",ExpressionUUID->"878198a8-61d4-4f7a-b80d-20af84cf53bc"],
+Cell[CellGroupData[{
+Cell[789, 28, 205, 4, 67, "Section",ExpressionUUID->"91ab2f35-b6a7-4be7-9773-b7b6189b865e"],
+Cell[997, 34, 1004, 27, 107, "Input",ExpressionUUID->"0f981b70-bd04-498b-94b3-ed37d6b92798"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[2038, 66, 156, 3, 53, "Section",ExpressionUUID->"6cf58a58-fada-41f9-96ab-2a0eecfec817"],
+Cell[2197, 71, 391, 12, 55, "Input",ExpressionUUID->"58c5e02a-f0e0-4441-8406-da5ffc5630c9"],
+Cell[2591, 85, 2967, 88, 157, "Input",ExpressionUUID->"02eee4b5-66f1-470f-b160-4a16de5685b2"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5595, 178, 155, 3, 67, "Section",ExpressionUUID->"9417eec9-b173-4d8d-8ac7-8de341b9d52e"],
+Cell[CellGroupData[{
+Cell[5775, 185, 1735, 43, 124, "Input",ExpressionUUID->"af3ee059-b361-4a07-8e6c-c6272d5b815f"],
+Cell[7513, 230, 267, 4, 32, "Output",ExpressionUUID->"9f05248f-a0db-4529-afb1-5bb7a599d4a5"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7817, 239, 832, 20, 55, "Input",ExpressionUUID->"cc96909a-6edd-4943-bf4d-277afd0f94ce"],
+Cell[8652, 261, 218, 4, 32, "Output",ExpressionUUID->"e110606f-359a-4565-858a-656f33f37050"],
+Cell[8873, 267, 220, 4, 32, "Output",ExpressionUUID->"9c76209a-169f-4b0a-9df4-12ca4e4093ba"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[9130, 276, 1472, 37, 96, "Input",ExpressionUUID->"2e1a9e90-a63f-4dab-9203-e86921e5ff08"],
+Cell[10605, 315, 492, 7, 32, "Output",ExpressionUUID->"cbcb3a59-0422-4d17-8e4b-9ef683d3ce52"],
+Cell[11100, 324, 498, 7, 32, "Output",ExpressionUUID->"35900626-4c01-4548-853e-6f98542a5474"],
+Cell[11601, 333, 493, 7, 32, "Output",ExpressionUUID->"4de0492f-72b9-494e-9f62-faedb2d5b847"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12143, 346, 155, 3, 67, "Section",ExpressionUUID->"5579f870-9109-43a8-ae4a-1f18dad85603"],
+Cell[12301, 351, 254, 6, 28, "Input",ExpressionUUID->"4964a99a-c433-4c2f-b971-53bacfcce7e6"],
+Cell[12558, 359, 1494, 29, 105, "Input",ExpressionUUID->"7a195da7-58e7-471f-8bf5-defdf8ab3329"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14089, 393, 154, 3, 67, "Section",ExpressionUUID->"aece8b02-eb43-496e-9b7e-fccb40defa7b"],
+Cell[CellGroupData[{
+Cell[14268, 400, 791, 20, 48, "Input",ExpressionUUID->"7f1b3b9a-87e6-4f6f-943c-2e4e760d7e10"],
+Cell[15062, 422, 1129, 20, 52, "Output",ExpressionUUID->"b2c76ac5-bfaf-4a19-b9e5-876c5da22d01"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[16228, 447, 1106, 20, 67, InheritFromParent,ExpressionUUID->"304b8345-ac8d-446f-b094-fd95530fde6c"],
+Cell[17337, 469, 1126, 20, 52, "Output",ExpressionUUID->"b30adb2a-25e8-4615-bf78-86f5e6a62366"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18512, 495, 155, 3, 67, "Section",ExpressionUUID->"1bc3aaae-0b1f-4d25-ac1c-c046883e80d3"],
+Cell[CellGroupData[{
+Cell[18692, 502, 1690, 42, 55, "Input",ExpressionUUID->"af4ac946-6371-4bb0-9153-df8d3e56a8f5"],
+Cell[20385, 546, 12477, 225, 274, "Output",ExpressionUUID->"cb8fbdc1-fcbb-4004-96a0-b7b1b86da19a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[32899, 776, 1361, 29, 32, "Input",ExpressionUUID->"3b506a52-a423-46d5-b402-c1e5035049ca"],
+Cell[34263, 807, 508, 11, 24, "Message",ExpressionUUID->"e512ee01-9a9c-4985-8b60-45fc108642fa"],
+Cell[34774, 820, 509, 11, 24, "Message",ExpressionUUID->"8ae2cec6-b09e-4f8e-8d43-83c090b462ca"],
+Cell[35286, 833, 507, 11, 24, "Message",ExpressionUUID->"f41e3cee-3409-4121-9b53-c6d72885c120"],
+Cell[35796, 846, 479, 10, 21, "Message",ExpressionUUID->"35b43881-a6d0-44e5-b5cd-0a66bd8e5ea6"],
+Cell[36278, 858, 619, 12, 21, "Message",ExpressionUUID->"bf370815-b617-4eb6-9904-16e60384b288"],
+Cell[36900, 872, 508, 11, 24, "Message",ExpressionUUID->"5822278b-0cf4-4b31-a163-8917e72bfd65"],
+Cell[37411, 885, 507, 11, 24, "Message",ExpressionUUID->"1e555080-7493-42a6-8992-1595e888e87b"],
+Cell[37921, 898, 509, 11, 24, "Message",ExpressionUUID->"bef1cc74-b019-4c9b-a06a-5e255aec7676"],
+Cell[38433, 911, 481, 10, 21, "Message",ExpressionUUID->"bc9eb7f3-58a0-4b80-b529-52cb46702e12"],
+Cell[38917, 923, 77773, 1528, 57, "Output",ExpressionUUID->"09e5ffc8-0b56-498e-8acf-bd16c0aa0164"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[116727, 2456, 194, 4, 28, "Input",ExpressionUUID->"7180250d-28f7-4e18-ae6d-ebfa4bfe58bf"],
+Cell[116924, 2462, 503, 11, 24, "Message",ExpressionUUID->"0718405a-01f7-4df9-83bc-afd4374f4dd1"],
+Cell[117430, 2475, 502, 11, 24, "Message",ExpressionUUID->"1987e765-7c0b-41bd-807d-919ad5a61b2a"],
+Cell[117935, 2488, 502, 11, 24, "Message",ExpressionUUID->"821b3ae7-f713-4c9a-84c2-78329547fad7"],
+Cell[118440, 2501, 474, 10, 21, "Message",ExpressionUUID->"669d6d1c-5606-480f-a101-f7017e1f552c"],
+Cell[118917, 2513, 344, 7, 32, "Output",ExpressionUUID->"ee9fea62-fe02-4090-94f9-9666c52e747a"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[119298, 2525, 3080, 80, 187, "Input",ExpressionUUID->"2031a918-b7fc-442a-a958-c0fc2f10e678"],
+Cell[122381, 2607, 529, 12, 24, "Message",ExpressionUUID->"4e42435b-719d-4c0a-a886-4a6ef9f92244"],
+Cell[122913, 2621, 528, 12, 24, "Message",ExpressionUUID->"484f2f9a-ddde-4aa1-86ac-1213ba8d563e"],
+Cell[123444, 2635, 528, 12, 24, "Message",ExpressionUUID->"1b9b272f-410f-43da-9f35-98b2eb9dcefd"],
+Cell[123975, 2649, 497, 11, 21, "Message",ExpressionUUID->"8adff528-4627-42c0-9bb2-218db676a321"],
+Cell[124475, 2662, 495, 9, 32, "Output",ExpressionUUID->"53efae7b-3deb-4aca-a156-1bc13fba0d64"],
+Cell[124973, 2673, 13051, 233, 253, "Output",ExpressionUUID->"28a2f686-a0eb-40b3-9484-c37c4798a0e7"],
+Cell[138027, 2908, 17319, 303, 274, "Output",ExpressionUUID->"07d55959-153e-44a0-ae24-d9642e5d5644"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+

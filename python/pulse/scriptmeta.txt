@@ -1,0 +1,18 @@
+#statedetone(steps = 1, runs = 500, calib = 1)
+#statedettwo(steps = 1, runs = 500, calib = 1)
+#timescan(state = "clock1", det = 0, step = 100, steps = 30, runs = 200, calib = 0)
+#freqscan(state = "D1", det = -1, step = 0.2, steps = 11, runs = 200)
+#freqscan(state = "D2", det = -1, step = 0.2, steps = 11, runs = 200)
+#freqscan(state = "plus1", det = -4, step = 1, steps = 8, runs = 200, calib = 0)
+#freqscan(state = "minus1", det = -4, step = 1, steps = 8, runs = 200, calib = 0)
+freqscan(state = "plus2", det = -4, step = 1, steps = 8, runs = 200, calib = 0)
+freqscan(state = "minus2", det = -4, step = 1, steps = 8, runs = 200, calib = 0)
+#freqscan(state = "clock2", det = -4, step = 0.5, steps = 30, runs = 50)
+#freqscan(clock1, fdet = 11, fstep = 0.05, steps = 5, runs = 50)
+#freqscan(clock2, fdet = 22, fstep = 0.05, steps = 6, runs = 50)
+#msRFpower(state = "red1ms", det = 50, step = 2.5, steps = 10, runs = 200)
+#msRFpower(state = "blue1ms", det = 50, step = 2.5, steps = 10, runs = 200)
+#msRFpower(state = "red2ms", det = 50, step = 2.5, steps = 10, runs = 200)
+#msRFpower(state = "blue2ms", det = 50, step = 2.5, steps = 10, runs = 200)
+
+

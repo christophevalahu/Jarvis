@@ -1,0 +1,38 @@
+19/04/10 Experiment Logbook:
+001: Time scan on clock1, step = 100, pi-time = 500.91 us
+002: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100015.98 KHz, Rabi = 1.0KHz
+001: Time scan on clock1, step = 100
+001: Frequency scan on clock1, det = -4, step = 0.25, pi-time = 501.51 us
+002: Time scan on clock1, step = 100, curve_fit() could not converge with good accuracy
+003: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100015.71 KHz, Rabi = 1.0KHz
+004: Time scan on clock1, step = 100, pi-time = 495.12 us
+005: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100015.42 KHz, Rabi = 1.0KHz
+006: Time scan on clock1, step = 100, pi-time = 498.07 us
+007: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100015.12 KHz, Rabi = 1.0KHz
+008: Time scan on clock1, step = 100, pi-time = 498.76 us
+009: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100014.90 KHz, Rabi = 1.0KHz
+010: Time scan on clock1, step = 100, pi-time = 500.93 us
+011: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100014.68 KHz, Rabi = 1.0KHz
+012: Time scan on clock1, step = 100, pi-time = 499.78 us
+013: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100014.50 KHz, Rabi = 1.0KHz
+014: Time scan on clock1, step = 100, pi-time = 499.99 us
+015: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100014.28 KHz, Rabi = 1.0KHz
+016: Time scan on clock1, step = 100, pi-time = 499.98 us
+017: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100014.00 KHz, Rabi = 1.0KHz
+018: Time scan on clock1, step = 100, pi-time = 498.71 us
+019: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100013.72 KHz, Rabi = 1.0KHz
+020: Time scan on clock1, step = 100, pi-time = 500.50 us
+021: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100013.41 KHz, Rabi = 1.0KHz
+022: Time scan on clock1, step = 100, pi-time = 497.42 us
+023: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100013.16 KHz, Rabi = 1.0KHz
+024: Time scan on clock1, step = 100, pi-time = 499.22 us
+025: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100012.93 KHz, Rabi = 1.0KHz
+026: Time scan on clock1, step = 100, pi-time = 498.37 us
+027: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100012.69 KHz, Rabi = 1.0KHz
+028: Time scan on clock1, step = 100, pi-time = 496.60 us
+029: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100012.46 KHz, Rabi = 1.0KHz
+030: Time scan on clock1, step = 100, pi-time = 498.56 us
+031: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100012.20 KHz, Rabi = 1.0KHz
+032: Time scan on clock1, step = 100
+001: Time scan on clock1, step = 100, pi-time = 500.26 us
+002: Frequency scan on clock1, det = -4, step = 0.25, f0 = 100011.98 KHz, Rabi = 1.0KHz

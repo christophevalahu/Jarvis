@@ -8604,6 +8604,7 @@
 		<Item Name="Global.lvlib" Type="Library" URL="../Global.lvlib"/>
 		<Item Name="Jarvis.vi" Type="VI" URL="../Jarvis.vi"/>
 		<Item Name="menu.rtm" Type="Document" URL="../menu.rtm"/>
+		<Item Name="Qalibrate_server.vi" Type="VI" URL="../VIs/Qalibrate/Qalibrate_server.vi"/>
 		<Item Name="test.vi" Type="VI" URL="../../Arduino/test.vi"/>
 		<Item Name="Dependencies" Type="Dependencies">
 			<Item Name="instr.lib" Type="Folder">
@@ -9088,6 +9089,7 @@
 				<Property Name="NI.PreserveRelativePath" Type="Bool">true</Property>
 			</Item>
 			<Item Name="Error Code Handler.vi" Type="VI" URL="../user_lib/atmcd32d_internal.llb/Error Code Handler.vi"/>
+			<Item Name="exp_status.vi" Type="VI" URL="../VIs/Qalibrate/exp_status.vi"/>
 			<Item Name="Jarvis_FPGATargetMacro_190515LV2017_nKk1DZ1Ci3E.lvbitx" Type="Document" URL="../FPGA_bitfile/Jarvis_FPGATargetMacro_190515LV2017_nKk1DZ1Ci3E.lvbitx"/>
 			<Item Name="Jarvis_FPGATargetMacro_281119simpleTDC_akCax+JGGYk.lvbitx" Type="Document" URL="../FPGA Bitfiles/Jarvis_FPGATargetMacro_281119simpleTDC_akCax+JGGYk.lvbitx"/>
 			<Item Name="Jarvis_FPGATargetMacro_281119TDCLV2017_HUsPPJBlkv4.lvbitx" Type="Document" URL="../FPGA_bitfile/Jarvis_FPGATargetMacro_281119TDCLV2017_HUsPPJBlkv4.lvbitx"/>

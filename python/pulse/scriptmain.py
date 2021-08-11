@@ -3,14 +3,14 @@ from states import *
 
 
 # ------ Edit These Parameters ------
-state = "ION1"
-detuning = 0
-step = 114
-nsteps = 23
-nruns = 200
+state = "D1ms"
+detuning = -2.5
+step = 0.5
+nsteps = 11
+nruns = 100
 # -----------------------------------
 delay = 0
-sb_cool = True
+sb_cool = False
 # -----------------------------------
 
 # ------ Uncomment desired function ----------
@@ -18,7 +18,7 @@ sb_cool = True
 #statedettwo(nsteps, nruns, sb_cool=sb_cool)
 #statedetmatch(nsteps, nruns)
 
-#freqscan(state, detuning, step, nsteps, nruns, sb_cool=sb_cool, delay=delay)
+freqscan(state, detuning, step, nsteps, nruns, sb_cool=sb_cool, delay=delay)
 #timescan(state, detuning, step, nsteps, nruns, sb_cool = sb_cool)
 #timescan_pf(state, detuning, step, nsteps, nruns, sb_cool = sb_cool)
 
@@ -46,7 +46,7 @@ sb_cool = True
 #spinspintime(state = state, mode = "both", det = detuning, step = step, steps = nsteps, runs = nruns)
 
 #catfreqscan("SYM1", detuning, step, nsteps, nruns, sb_cool)
-cattimescan("ION1", detuning, step, nsteps, nruns, sb_cool)
+#cattimescan("ION1", detuning, step, nsteps, nruns, sb_cool)
 #msgate(detuning, step, nsteps, nruns)
 #mstwotonegate(detuning, step, nsteps, nruns)
 #msparity(detuning, step, nsteps, nruns)
